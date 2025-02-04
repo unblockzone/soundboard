@@ -3,22 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>braybray's soundboard</title>
+    <title>BrayBray's Soundboard</title>
+
+    <!-- Custom Favicon -->
+    <link rel="icon" type="image/png" href="https://your-favicon-url.com/favicon.png">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap');
+
+        /* Prevent Scrolling */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+        }
 
         /* Moving Gradient Background */
         body {
             background: linear-gradient(-45deg, #1a001a, #3d003d, #000, #200020);
             background-size: 400% 400%;
             animation: gradientMove 10s infinite alternate;
-            margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            overflow: hidden;
         }
 
         @keyframes gradientMove {
@@ -26,33 +35,43 @@
             100% { background-position: 100% 50%; }
         }
 
-        /* Header */
+        /* Header (Fixed at Top) */
         .header {
+            width: 100%;
+            background-color: rgba(51, 51, 51, 0.9);
             color: white;
             text-align: center;
             font-family: 'Bowlby One', cursive;
             font-size: 28px;
             padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
             transition: transform 0.3s ease;
         }
 
         /* Header Hover Zoom Effect */
         .header:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
-        /* Button Grid */
+        /* Fullscreen Button Grid */
         .container {
             display: grid;
-            grid-template-columns: repeat(5, auto);
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, 1fr);
             gap: 20px;
-            margin-top: 20px;
+            width: 100%;
+            height: 100vh;
+            padding-top: 80px; /* Adjust for header */
+            box-sizing: border-box;
         }
 
-        /* Circular Buttons with Custom Images */
+        /* Circular Buttons */
         .button {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             border: 3px solid white;
             background-size: cover;
@@ -75,22 +94,42 @@
 </head>
 <body>
 
-    <!-- Header -->
-    <div class="header">braybray's soundboard</div>
+    <!-- Fixed Header -->
+    <div class="header">BrayBray's Soundboard</div>
 
-    <!-- Button Grid -->
+    <!-- Fullscreen Button Grid -->
     <div class="container">
-        <button class="button" style="background-image: url('https://your-image-url-1.com');"></button>
-        <button class="button" style="background-image: url('https://your-image-url-2.com');"></button>
-        <button class="button" style="background-image: url('https://your-image-url-3.com');"></button>
-        <button class="button" style="background-image: url('https://your-image-url-4.com');"></button>
-        <button class="button" style="background-image: url('https://your-image-url-5.com');"></button>
-        <button class="button" style="background-image: url('https://your-image-url-6.com');"></button>
-        <button class="button" style="background-image: url('https://your-image-url-7.com');"></button>
-        <button class="button" style="background-image: url('https://your-image-url-8.com');"></button>
-        <button class="button" style="background-image: url('https://your-image-url-9.com');"></button>
-        <button class="button" style="background-image: url('https://your-image-url-10.com');"></button>
+        <button class="button" style="background-image: url('https://your-image-url-1.com');" onclick="playSound('sound1')"></button>
+        <button class="button" style="background-image: url('https://your-image-url-2.com');" onclick="playSound('sound2')"></button>
+        <button class="button" style="background-image: url('https://your-image-url-3.com');" onclick="playSound('sound3')"></button>
+        <button class="button" style="background-image: url('https://your-image-url-4.com');" onclick="playSound('sound4')"></button>
+        <button class="button" style="background-image: url('https://your-image-url-5.com');" onclick="playSound('sound5')"></button>
+        <button class="button" style="background-image: url('https://your-image-url-6.com');" onclick="playSound('sound6')"></button>
+        <button class="button" style="background-image: url('https://your-image-url-7.com');" onclick="playSound('sound7')"></button>
+        <button class="button" style="background-image: url('https://your-image-url-8.com');" onclick="playSound('sound8')"></button>
+        <button class="button" style="background-image: url('https://your-image-url-9.com');" onclick="playSound('sound9')"></button>
+        <button class="button" style="background-image: url('https://your-image-url-10.com');" onclick="playSound('sound10')"></button>
     </div>
+
+    <!-- Sound Files -->
+    <audio id="sound1" src="https://your-github-repo-url.com/sounds/sound1.mp3"></audio>
+    <audio id="sound2" src="https://your-github-repo-url.com/sounds/sound2.mp3"></audio>
+    <audio id="sound3" src="https://your-github-repo-url.com/sounds/sound3.mp3"></audio>
+    <audio id="sound4" src="https://your-github-repo-url.com/sounds/sound4.mp3"></audio>
+    <audio id="sound5" src="https://your-github-repo-url.com/sounds/sound5.mp3"></audio>
+    <audio id="sound6" src="https://your-github-repo-url.com/sounds/sound6.mp3"></audio>
+    <audio id="sound7" src="https://your-github-repo-url.com/sounds/sound7.mp3"></audio>
+    <audio id="sound8" src="https://your-github-repo-url.com/sounds/sound8.mp3"></audio>
+    <audio id="sound9" src="https://your-github-repo-url.com/sounds/sound9.mp3"></audio>
+    <audio id="sound10" src="https://your-github-repo-url.com/sounds/sound10.mp3"></audio>
+
+    <script>
+        function playSound(soundId) {
+            let sound = document.getElementById(soundId);
+            sound.currentTime = 0; // Reset sound to start
+            sound.play();
+        }
+    </script>
 
 </body>
 </html>
